@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invoice - Niprak App Services</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom font import for 'Inter' */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc; /* Lighter background for a cleaner look */
+            position: relative; /* For absolute positioning of background elements */
+            min-height: 100vh; /* Ensure body takes full viewport height */
+            padding: 1rem; /* Add some default padding */
+            overflow-x: hidden; /* Prevent horizontal scrollbar from background elements */
+        }
+        /* Subtle shadow for the main container, common in modern UI */
+        .invoice-container {
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+            position: relative; /* Ensure it stays above background elements */
+            z-index: 10; /* Bring content to front */
+            margin: auto; /* Center the container horizontally */
+        }
+
+        /* --- Background Elements Styling --- */
+        .bg-element {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0;
+            animation: floatAndFade 25s infinite ease-in-out; /* Longer animation for more subtlety */
+            z-index: 1; /* Keep background elements behind content */
+            filter: blur(12px); /* Slightly more blur */
+        }
+
+        /* Define different sizes, positions, colors, and animation delays for variety */
+        .bg-element-1 { width: 100px; height: 100px; top: 10%; left: 5%; animation-delay: 0s; background-color: rgba(66, 133, 244, 0.08); /* Light Google Blue */ }
+        .bg-element-2 { width: 150px; height: 150px; bottom: 15%; right: 10%; animation-delay: 6s; background-color: rgba(234, 67, 53, 0.06); /* Light Google Red */ }
+        .bg-element-3 { width: 80px; height: 80px; top: 25%; right: 20%; animation-delay: 12s; background-color: rgba(251, 188, 5, 0.07); /* Light Google Yellow */ }
+        .bg-element-4 { width: 120px; height: 120px; bottom: 5%; left: 25%; animation-delay: 18s; background-color: rgba(52, 168, 83, 0.05); /* Light Google Green */ }
+        .bg-element-5 { width: 70px; height: 70px; top: 40%; left: 40%; animation-delay: 3s; background-color: rgba(66, 133, 244, 0.04); }
+        .bg-element-6 { width: 90px; height: 90px; bottom: 30%; right: 30%; animation-delay: 9s; background-color: rgba(234, 67, 53, 0.05); }
+        .bg-element-7 { width: 110px; height: 110px; top: 5%; right: 5%; animation-delay: 22s; background-color: rgba(251, 188, 5, 0.06); }
+        .bg-element-8 { width: 60px; height: 60px; bottom: 20%; left: 5%; animation-delay: 1s; background-color: rgba(52, 168, 83, 0.04); }
+
+        /* Keyframe animation for floating and fading effect */
+        @keyframes floatAndFade {
+            0% {
+                transform: translateY(0) translateX(0) scale(0.8);
+                opacity: 0;
+            }
+            20% {
+                transform: translateY(-20px) translateX(10px) scale(1);
+                opacity: 0.2;
+            }
+            40% {
+                transform: translateY(0) translateX(0) scale(1.1);
+                opacity: 0.3;
+            }
+            60% {
+                transform: translateY(20px) translateX(-10px) scale(0.9);
+                opacity: 0.1;
+            }
+            80% {
+                transform: translateY(0) translateX(0) scale(0.8);
+                opacity: 0;
+            }
+            100% {
+                transform: translateY(0) translateX(0) scale(0.8);
+                opacity: 0;
+            }
+        }
+        /* Icon styling to match size of previous SVG */
+        .tuition-icon {
+            width: 20px; /* Adjust as needed */
+            height: 20px; /* Adjust as needed */
+            object-fit: contain; /* Ensures the image fits without distortion */
+            vertical-align: middle; /* Align with text */
+            margin-right: 8px; /* Space between icon and text */
+            filter: drop-shadow(0 1px 1px rgba(0,0,0,0.1)); /* Subtle shadow for visual pop */
+        }
+    </style>
+</head>
+<body class="flex flex-col items-center justify-start min-h-screen p-4">
+    <!-- Background elements -->
+    <div class="bg-element bg-element-1"></div>
+    <div class="bg-element bg-element-2"></div>
+    <div class="bg-element bg-element-3"></div>
+    <div class="bg-element bg-element-4"></div>
+    <div class="bg-element bg-element-5"></div>
+    <div class="bg-element bg-element-6"></div>
+    <div class="bg-element bg-element-7"></div>
+    <div class="bg-element bg-element-8"></div>
+
+    <div class="invoice-container bg-white rounded-lg p-6 sm:p-8 md:p-10 w-full max-w-2xl">
+
+        <!-- Header Section -->
+        <header class="text-center mb-8 pb-4 border-b border-gray-200">
+            <h1 class="text-4xl font-light text-gray-800 mb-2 tracking-tight">INVOICE</h1>
+            <p class="text-xl text-gray-600 font-normal mb-4">Android App Development & Maintenance</p>
+
+            <div class="text-gray-700 text-sm">
+                <p class="font-semibold text-base mb-1">Niprak</p>
+                <p>Nithya Prakash M</p>
+                <p>iamnithyaprakash@gmail.com | 7092988131</p>
+            </div>
+        </header>
+
+        <!-- Invoice Details -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-y-4 md:gap-x-8 mb-8 text-sm text-gray-700">
+            <div>
+                <p class="mb-2"><strong class="font-medium text-gray-800">Invoice Number:</strong> INV-2025-002</p>
+                <p class="mb-2"><strong class="font-medium text-gray-800">Date:</strong> June 10, 2025</p>
+                <p class="mb-2"><strong class="font-medium text-gray-800">Billing Period:</strong> May 1, 2025 - May 31, 2025</p>
+                <p><strong class="font-medium text-gray-800">Due Date:</strong> </p>
+            </div>
+            <div class="md:text-right">
+                <p class="mb-2 flex items-center justify-end"><strong class="font-medium text-gray-800 mr-2">Bill To:</strong>
+                    <!-- Tuition Icon (PNG) -->
+                    <img src="Assets/ic_rosnet.png" alt="Tuition Icon" class="tuition-icon">
+                </p>
+                <p class="font-medium text-gray-800">Rosnet Academy</p>
+                <p>H/o: #79A, Umapathi Towers, 6th street,</p>
+                <p>Lakshmipuram, Masakalipalayam Road,</p>
+                <p>Coimbatore - 641 004</p>
+                <p>Email: rosnetacademy@gmail.com</p>
+            </div>
+        </div>
+
+        <!-- Line Items -->
+        <div class="mb-8 border border-gray-200 rounded-lg overflow-hidden">
+            <div class="flex justify-between items-center py-3 px-4 bg-gray-50 font-semibold text-gray-700 text-base">
+                <span>Description</span>
+                <span>Amount (INR)</span>
+            </div>
+            <div class="flex justify-between items-center py-3 px-4 border-t border-gray-100 text-gray-700 text-base">
+                <span>Google Cloud Usage (May 2025 App Activity)</span>
+                <span id="cloud-cost">₹4.63</span>
+            </div>
+            <div class="flex justify-between items-center py-3 px-4 border-t border-gray-100 text-gray-700 text-base">
+                <span>Monthly App Maintenance & Support Fee</span>
+                <span id="maintenance-fee">₹100.00</span>
+            </div>
+            <p class="text-xs text-gray-500 px-4 pt-1 pb-3">
+                (Includes bug fixes, updates, user account management, and ongoing technical assistance)
+            </p>
+        </div>
+
+        <!-- Total Amount -->
+        <div class="text-right text-xl md:text-2xl font-bold text-gray-800 mb-10 p-4 bg-blue-50 rounded-lg">
+            <span>TOTAL AMOUNT DUE:</span>
+            <span id="total-amount" class="text-blue-700 ml-4">₹3,504.63</span>
+        </div>
+
+        <!-- Payment Options Section -->
+        <div class="mb-8 p-4 border border-gray-200 rounded-lg bg-gray-50 text-center">
+            <h3 class="text-lg font-semibold text-gray-800 mb-4">Choose your payment method</h3>
+
+            <!-- Google Pay Button -->
+            <a id="gpay-button" href="#"
+               class="inline-flex items-center justify-center bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg transition duration-300 ease-in-out shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-75 mb-6 text-lg">
+                <svg class="w-6 h-6 mr-3" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 16H9V8h2v10zm4 0h-2V8h2v10z"/>
+                </svg>
+                Pay with Google Pay
+            </a>
+
+            <p class="text-sm text-gray-600 mt-2 mb-4">
+                You can also scan the QR code below:
+            </p>
+
+            <!-- GPay QR Code -->
+            <div class="p-5 bg-white border border-gray-200 rounded-xl inline-block shadow-sm">
+                <!-- IMPORTANT: Replace this placeholder image with your actual GPay QR code image URL -->
+                <img src="Assets/gpay_qr.jpg"
+                     alt="Google Pay QR Code"
+                     class="w-48 h-48 sm:w-56 sm:h-56 rounded-lg shadow-md mx-auto">
+            </div>
+
+            <p class="text-sm text-red-500 font-medium mt-4">
+                Kindly share a screenshot of the payment confirmation to iamnithyaprakash@gmail.com or 7092988131 once done for our records.
+            </p>
+        </div>
+
+        <!-- Notes / Remarks Section -->
+        <div class="mb-8 p-4 border border-gray-200 rounded-lg bg-gray-50">
+            <h3 class="text-lg font-semibold text-gray-800 mb-3">Notes / Remarks</h3>
+            <p id="notes-content" class="text-sm text-gray-700 italic">
+                Thank you for your continued partnership. The app performed exceptionally well in May, with minimal cloud usage.
+                We look forward to supporting Rosnet Academy's digital growth!
+            </p>
+        </div>
+
+        <!-- Footer Section -->
+        <footer class="text-center text-sm text-gray-500 pt-6 border-t border-gray-200">
+            <p>Thank you for your business!</p>
+            <p>For any app-related queries or support, please contact Nithya Prakash M at iamnithyaprakash@gmail.com or 7092988131.</p>
+            <p class="mt-2 text-xs">&copy; 2025 Niprak. All rights reserved.</p>
+        </footer>
+
+    </div>
+
+    <script>
+        // JavaScript for automatic total calculation and GPay button dynamic link
+        window.onload = function() {
+            const cloudCostElement = document.getElementById('cloud-cost');
+            const maintenanceFeeElement = document.getElementById('maintenance-fee');
+            const totalAmountElement = document.getElementById('total-amount');
+            const gpayButton = document.getElementById('gpay-button');
+
+            // Your UPI ID - IMPORTANT: REPLACE THIS WITH YOUR ACTUAL GOOGLE PAY UPI ID
+            const YOUR_UPI_ID = "iamnithyaprakash@oksbi";
+            const YOUR_NAME = "Nithya Prakash M";
+            const INVOICE_NUMBER = "INV-2025-002"; // Make this dynamic if your invoice numbers change programmatically
+            const BILLING_PERIOD = "May 1, 2025 - May 31, 2025";
+            const APP_TYPE = "Android tuition center app";
+
+
+            // Helper function to parse currency string to float
+            const parseCurrency = (text) => parseFloat(text.replace('₹', '').replace(/,/g, ''));
+            // Helper function to format float to Indian Rupee currency string
+            const formatCurrency = (value) => `₹${value.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+
+            // Function to calculate and update the total amount and GPay button link
+            function calculateTotalAndSetGPayLink() {
+                const cloudCost = parseCurrency(cloudCostElement.textContent);
+                const maintenanceFee = parseCurrency(maintenanceFeeElement.textContent);
+                const total = cloudCost + maintenanceFee;
+                totalAmountElement.textContent = formatCurrency(total);
+
+                const TRANSACTION_NOTE = `Niprak App Bill ${INVOICE_NUMBER}`; // Dynamic transaction note
+
+                // Encode the transaction note for URL safety
+                const encodedNote = encodeURIComponent(TRANSACTION_NOTE);
+
+                // Construct the GPay deep link
+                const gpayLink = `upi://pay?pa=${YOUR_UPI_ID}&pn=${encodeURIComponent(YOUR_NAME)}&am=${total.toFixed(2)}&cu=INR&tn=${encodedNote}`;
+                gpayButton.href = gpayLink;
+            }
+
+            // Initial calculation and GPay link setup
+            calculateTotalAndSetGPayLink();
+        };
+    </script>
+</body>
+</html>
