@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Invoice - Niprak App Services</title>
+    <title>Invoice - Rosnet Academy</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
@@ -11,7 +11,17 @@
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #f8fafc; /* Lighter background for a cleaner look */
+            /* Updated background to a mild Instagram gradient using multiple translucent color stops */
+            background: linear-gradient(to bottom right,
+                        rgba(64, 93, 230, 0.15),    /* Instagram Blue (very mild) */
+                        rgba(88, 81, 219, 0.2),     /* Instagram Purple Blue (very mild) */
+                        rgba(131, 58, 180, 0.25),   /* Instagram Purple (mild) */
+                        rgba(193, 53, 132, 0.3),    /* Instagram Purple Red (mild) */
+                        rgba(225, 48, 108, 0.35),   /* Instagram Rose (mild) */
+                        rgba(245, 96, 64, 0.4),     /* Instagram Red Orange (mild) */
+                        rgba(252, 175, 69, 0.45),   /* Instagram Orange Yellow (mild) */
+                        rgba(255, 220, 128, 0.5)    /* Instagram Yellow (mild) */
+                    );
             position: relative; /* For absolute positioning of background elements */
             min-height: 100vh; /* Ensure body takes full viewport height */
             padding: 1rem; /* Add some default padding */
@@ -20,12 +30,15 @@
         /* Subtle shadow for the main container, common in modern UI */
         .invoice-container {
             box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
-            position: relative; /* Ensure it stays above background elements */
+            position: relative; /* CRITICAL: Positioning context for children .bg-element */
             z-index: 10; /* Bring content to front */
             margin: auto; /* Center the container horizontally */
+            overflow: hidden; /* CLIP background elements if they extend beyond container */
+            /* New: Background for the invoice container itself */
+            background: linear-gradient(to bottom right, #ffffff, #f7f9fc); /* Very subtle white to light blue/gray gradient */
         }
 
-        /* --- Background Elements Styling --- */
+        /* --- Background Elements Styling (now relative to .invoice-container) --- */
         .bg-element {
             position: absolute;
             border-radius: 50%;
@@ -34,16 +47,22 @@
             z-index: 1; /* Keep background elements behind content */
             filter: blur(12px); /* Slightly more blur */
         }
+        /* No SVG fill needed here as these are just circles with rgba colors */
 
         /* Define different sizes, positions, colors, and animation delays for variety */
-        .bg-element-1 { width: 100px; height: 100px; top: 10%; left: 5%; animation-delay: 0s; background-color: rgba(66, 133, 244, 0.08); /* Light Google Blue */ }
-        .bg-element-2 { width: 150px; height: 150px; bottom: 15%; right: 10%; animation-delay: 6s; background-color: rgba(234, 67, 53, 0.06); /* Light Google Red */ }
-        .bg-element-3 { width: 80px; height: 80px; top: 25%; right: 20%; animation-delay: 12s; background-color: rgba(251, 188, 5, 0.07); /* Light Google Yellow */ }
-        .bg-element-4 { width: 120px; height: 120px; bottom: 5%; left: 25%; animation-delay: 18s; background-color: rgba(52, 168, 83, 0.05); /* Light Google Green */ }
-        .bg-element-5 { width: 70px; height: 70px; top: 40%; left: 40%; animation-delay: 3s; background-color: rgba(66, 133, 244, 0.04); }
-        .bg-element-6 { width: 90px; height: 90px; bottom: 30%; right: 30%; animation-delay: 9s; background-color: rgba(234, 67, 53, 0.05); }
-        .bg-element-7 { width: 110px; height: 110px; top: 5%; right: 5%; animation-delay: 22s; background-color: rgba(251, 188, 5, 0.06); }
-        .bg-element-8 { width: 60px; height: 60px; bottom: 20%; left: 5%; animation-delay: 1s; background-color: rgba(52, 168, 83, 0.04); }
+        /* Adjusted positions to be within the smaller container bounds */
+        .bg-element-1 { width: 80px; height: 80px; top: 5%; left: 8%; animation-delay: 0s; background-color: rgba(170, 150, 200, 0.08); /* Mild Purple */ }
+        .bg-element-2 { width: 120px; height: 120px; bottom: 8%; right: 5%; animation-delay: 6s; background-color: rgba(150, 180, 220, 0.06); /* Mild Blue */ }
+        .bg-element-3 { width: 70px; height: 70px; top: 15%; right: 12%; animation-delay: 12s; background-color: rgba(220, 150, 180, 0.07); /* Mild Pink */ }
+        .bg-element-4 { width: 110px; height: 110px; bottom: 3%; left: 15%; animation-delay: 18s; background-color: rgba(230, 230, 230, 0.05); /* Very Light Gray/White */ }
+        .bg-element-5 { width: 60px; height: 60px; top: 30%; left: 25%; animation-delay: 3s; background-color: rgba(170, 150, 200, 0.04); }
+        .bg-element-6 { width: 90px; height: 90px; bottom: 20%; right: 20%; animation-delay: 9s; background-color: rgba(150, 180, 220, 0.05); }
+        .bg-element-7 { width: 100px; height: 100px; top: 2%; right: 2%; animation-delay: 22s; background-color: rgba(220, 150, 180, 0.06); }
+        .bg-element-8 { width: 50px; height: 50px; bottom: 10%; left: 3%; animation-delay: 1s; background-color: rgba(230, 230, 230, 0.04); }
+        .bg-element-9 { width: 110px; height: 110px; top: 50%; left: 10%; animation-delay: 16s; background-color: rgba(170, 150, 200, 0.07); }
+        .bg-element-10 { width: 65px; height: 65px; top: 60%; right: 15%; animation-delay: 20s; background-color: rgba(150, 180, 220, 0.06); }
+        .bg-element-11 { width: 85px; height: 85px; top: 40%; right: 30%; animation-delay: 1s; background-color: rgba(220, 150, 180, 0.05); }
+        .bg-element-12 { width: 55px; height: 55px; bottom: 7%; left: 35%; animation-delay: 9s; background-color: rgba(230, 230, 230, 0.07); }
 
         /* Keyframe animation for floating and fading effect */
         @keyframes floatAndFade {
@@ -53,15 +72,15 @@
             }
             20% {
                 transform: translateY(-20px) translateX(10px) scale(1);
-                opacity: 0.2;
+                opacity: 0.1; /* Lower peak opacity for subtlety */
             }
             40% {
                 transform: translateY(0) translateX(0) scale(1.1);
-                opacity: 0.3;
+                opacity: 0.15; /* Lower peak opacity for subtlety */
             }
             60% {
                 transform: translateY(20px) translateX(-10px) scale(0.9);
-                opacity: 0.1;
+                opacity: 0.05; /* Lower peak opacity for subtlety */
             }
             80% {
                 transform: translateY(0) translateX(0) scale(0.8);
@@ -84,25 +103,30 @@
     </style>
 </head>
 <body class="flex flex-col items-center justify-start min-h-screen p-4">
-    <!-- Background elements -->
-    <div class="bg-element bg-element-1"></div>
-    <div class="bg-element bg-element-2"></div>
-    <div class="bg-element bg-element-3"></div>
-    <div class="bg-element bg-element-4"></div>
-    <div class="bg-element bg-element-5"></div>
-    <div class="bg-element bg-element-6"></div>
-    <div class="bg-element bg-element-7"></div>
-    <div class="bg-element bg-element-8"></div>
-
+    <!-- Main invoice container -->
     <div class="invoice-container bg-white rounded-lg p-6 sm:p-8 md:p-10 w-full max-w-2xl">
+        <!-- Background elements (scattered and subtle) -->
+        <div class="bg-element bg-element-1"></div>
+        <div class="bg-element bg-element-2"></div>
+        <div class="bg-element bg-element-3"></div>
+        <div class="bg-element bg-element-4"></div>
+        <div class="bg-element bg-element-5"></div>
+        <div class="bg-element bg-element-6"></div>
+        <div class="bg-element bg-element-7"></div>
+        <div class="bg-element bg-element-8"></div>
+        <div class="bg-element bg-element-9"></div>
+        <div class="bg-element bg-element-10"></div>
+        <div class="bg-element bg-element-11"></div>
+        <div class="bg-element bg-element-12"></div>
 
         <!-- Header Section -->
         <header class="text-center mb-8 pb-4 border-b border-gray-200">
             <h1 class="text-4xl font-light text-gray-800 mb-2 tracking-tight">INVOICE</h1>
-            <p class="text-xl text-gray-600 font-normal mb-4">Android App Development & Maintenance</p>
+            <p class="text-xl text-gray-600 font-normal mb-4">Android App Service & Maintenance</p>
 
             <div class="text-gray-700 text-sm">
                 <p class="font-semibold text-base mb-1">Niprak</p>
+                <p class="text-xs text-gray-500 mb-1">Software Development & IT Services</p> <!-- Added service description -->
                 <p>Nithya Prakash M</p>
                 <p>iamnithyaprakash@gmail.com | 7092988131</p>
             </div>
@@ -114,7 +138,7 @@
                 <p class="mb-2"><strong class="font-medium text-gray-800">Invoice Number:</strong> INV-2025-002</p>
                 <p class="mb-2"><strong class="font-medium text-gray-800">Date:</strong> June 10, 2025</p>
                 <p class="mb-2"><strong class="font-medium text-gray-800">Billing Period:</strong> May 1, 2025 - May 31, 2025</p>
-<!--                 <p><strong class="font-medium text-gray-800">Due Date:</strong> </p> -->
+                <p><strong class="font-medium text-gray-800">Due Date:</strong> June 25, 2025</p>
             </div>
             <div class="md:text-right">
                 <p class="mb-2 flex items-center justify-end"><strong class="font-medium text-gray-800 mr-2">Bill To:</strong>
@@ -123,7 +147,7 @@
                 </p>
                 <p class="font-medium text-gray-800">Rosnet Academy</p>
                 <p>H/o: #79A, Umapathi Towers, 6th street,</p>
-                <p>Lakshmipuram, Masakalipalayam Road,</p>
+                <p>Lakshmipuram, Masakalipalayam Main Road,</p>
                 <p>Coimbatore - 641 004</p>
                 <p>Email: rosnetacademy@gmail.com</p>
             </div>
@@ -161,9 +185,7 @@
             <!-- Google Pay Button -->
             <a id="gpay-button" href="#"
                class="inline-flex items-center justify-center bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg transition duration-300 ease-in-out shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-75 mb-6 text-lg">
-                <svg class="w-6 h-6 mr-3" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 16H9V8h2v10zm4 0h-2V8h2v10z"/>
-                </svg>
+                <img width="24" height="24" src="https://img.icons8.com/fluency/50/google-pay.png" alt="google-pay" class="mr-2"/>
                 Pay with Google Pay
             </a>
 
