@@ -12,7 +12,7 @@
         body {
             font-family: 'Inter', sans-serif;
             /* Updated background to a mild Instagram gradient using multiple translucent color stops */
-            background: linear-gradient(to bottom right,
+            background: linear-gradient(to top right,
                         rgba(64, 93, 230, 0.15),    /* Instagram Blue (very mild) */
                         rgba(88, 81, 219, 0.2),     /* Instagram Purple Blue (very mild) */
                         rgba(131, 58, 180, 0.25),   /* Instagram Purple (mild) */
@@ -168,7 +168,7 @@
             <div class="md:text-right">
                 <p class="mb-2 flex items-center justify-end"><strong class="font-medium text-gray-800 mr-2">Bill To:</strong>
                     <!-- Tuition Icon (PNG) -->
-                    <img src="https://placehold.co/20x20/007bff/ffffff?text=Cap" alt="Tuition Icon" class="tuition-icon">
+                    <img src="Assets/ic_rosnet.png" alt="Tuition Icon" class="tuition-icon">
                 </p>
                 <p class="font-medium text-gray-800">Rosnet Academy</p>
                 <p>H/o: #79A, Umapathi Towers, 6th street,</p>
@@ -209,14 +209,45 @@
                 </div>
             </div>
 
-            <div class="flex justify-between items-center py-3 px-4 border-t border-gray-100 text-gray-700 text-base bg-green-50">
-                <span>Website Maintenance Fee</span>
-                <span id="website-maintenance-fee">₹0.00</span>
+            <!-- Website Maintenance Fee with Dropdown -->
+            <div class="border-t border-gray-100 bg-green-50">
+                <div id="website-maintenance-toggle" class="flex justify-between items-center py-3 px-4 dropdown-toggle">
+                    <span>Website Maintenance Fee</span>
+                    <span class="flex items-center">
+                        <span id="website-maintenance-fee">₹0.00</span>
+                        <svg class="w-4 h-4 ml-2 text-gray-600 arrow-icon" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                        </svg>
+                    </span>
+                </div>
+                <div id="website-maintenance-dropdown" class="px-4 text-sm text-gray-600 dropdown-content">
+                    <div class="flex justify-between py-1">
+                        <span>This month's maintenance is:</span>
+                        <span>Free!</span>
+                    </div>
+                </div>
             </div>
-             <div class="flex justify-between items-center py-3 px-4 border-t border-gray-100 text-gray-700 text-base">
-                <span>Hosting Platform Fee</span>
-                <span id="hosting-platform-fee">₹50.00</span>
+
+            <!-- Hosting Platform Fee with Dropdown (now with bg-green-50) -->
+            <div class="border-t border-gray-100 bg-green-50">
+                <div id="hosting-platform-toggle" class="flex justify-between items-center py-3 px-4 dropdown-toggle">
+                    <span>Hosting Platform Fee</span>
+                    <span class="flex items-center">
+                        <span class="text-gray-400 line-through mr-2">₹100.00</span>
+                        <span id="hosting-platform-fee">₹50.00</span>
+                        <svg class="w-4 h-4 ml-2 text-gray-600 arrow-icon" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                        </svg>
+                    </span>
+                </div>
+                <div id="hosting-platform-dropdown" class="px-4 text-sm text-gray-600 dropdown-content">
+                    <div class="flex justify-between py-1">
+                        <span>Discount:</span>
+                        <span>50%</span>
+                    </div>
+                </div>
             </div>
+
             <p class="text-xs text-gray-500 px-4 pt-1 pb-3">
                 (Includes bug fixes, updates, user account management, and ongoing technical assistance for app and website)
             </p>
@@ -289,6 +320,14 @@
             const appMaintenanceDropdown = document.getElementById('app-maintenance-dropdown');
             const appMaintenanceArrow = appMaintenanceToggle.querySelector('.arrow-icon');
 
+            const websiteMaintenanceToggle = document.getElementById('website-maintenance-toggle');
+            const websiteMaintenanceDropdown = document.getElementById('website-maintenance-dropdown');
+            const websiteMaintenanceArrow = websiteMaintenanceToggle.querySelector('.arrow-icon');
+
+            const hostingPlatformToggle = document.getElementById('hosting-platform-toggle');
+            const hostingPlatformDropdown = document.getElementById('hosting-platform-dropdown');
+            const hostingPlatformArrow = hostingPlatformToggle.querySelector('.arrow-icon');
+
 
             // Your UPI ID - IMPORTANT: REPLACE THIS WITH YOUR ACTUAL GOOGLE PAY UPI ID
             const YOUR_UPI_ID = "iamnithyaprakash@oksbi";
@@ -329,6 +368,17 @@
                 appMaintenanceDropdown.classList.toggle('show');
                 appMaintenanceArrow.classList.toggle('rotated');
             });
+
+            websiteMaintenanceToggle.addEventListener('click', () => {
+                websiteMaintenanceDropdown.classList.toggle('show');
+                websiteMaintenanceArrow.classList.toggle('rotated');
+            });
+
+            hostingPlatformToggle.addEventListener('click', () => {
+                hostingPlatformDropdown.classList.toggle('show');
+                hostingPlatformArrow.classList.toggle('rotated');
+            });
+
 
             // Initial calculation and GPay link setup
             calculateTotalAndSetGPayLink();
