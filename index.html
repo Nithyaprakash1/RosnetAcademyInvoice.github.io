@@ -155,9 +155,9 @@
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-y-4 md:gap-x-8 mb-8 text-sm text-gray-700">
             <div>
-                <p class="mb-2"><strong class="font-medium text-gray-800">Invoice Number:</strong> <span id="invoice-number">INV-2025-002</span></p>
-                <p class="mb-2"><strong class="font-medium text-gray-800">Date:</strong> <span id="invoice-date">July 10, 2025</span></p>
-                <p class="mb-2"><strong class="font-medium text-gray-800">Billing Period:</strong> <span id="billing-period">July 1, 2025 - July 31, 2025</span></p>
+                <p class="mb-2"><strong class="font-medium text-gray-800">Invoice Number:</strong> <span id="invoice-number"></span></p>
+                <p class="mb-2"><strong class="font-medium text-gray-800">Date:</strong> <span id="invoice-date"></span></p>
+                <p class="mb-2"><strong class="font-medium text-gray-800">Billing Period:</strong> <span id="billing-period"></span></p>
             </div>
             <div class="md:text-right">
                 <p class="mb-2 flex items-center justify-end"><strong class="font-medium text-gray-800 mr-2">Bill To:</strong>
@@ -177,16 +177,16 @@
                 <span>Amount (INR)</span>
             </div>
             <div class="flex justify-between items-center py-3 px-4 border-t border-gray-100 text-gray-700 text-base">
-                <span>Google Cloud Usage (<span id="cloud-usage-month">July 2025</span> App Activity)</span>
-                <span id="cloud-cost">₹3.51</span>
+                <span>Google Cloud Usage (<span id="cloud-usage-month"></span> App Activity)</span>
+                <span id="cloud-cost"></span>
             </div>
 
             <div class="border-t border-gray-100 bg-green-50">
                 <div id="app-maintenance-toggle" class="flex justify-between items-center py-3 px-4 dropdown-toggle">
                     <span>App Maintenance & Support Fee</span>
                     <span class="flex items-center">
-                        <span class="text-gray-400 line-through mr-2" id="app-maintenance-original-fee">₹100.00</span>
-                        <span id="app-maintenance-fee">₹50.00</span>
+                        <span class="text-gray-400 line-through mr-2" id="app-maintenance-original-fee"></span>
+                        <span id="app-maintenance-fee"></span>
                         <svg class="w-4 h-4 ml-2 text-gray-600 arrow-icon" fill="currentColor" viewBox="0 0 20 20">
                             <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
                         </svg>
@@ -204,7 +204,7 @@
                 <div id="website-maintenance-toggle" class="flex justify-between items-center py-3 px-4 dropdown-toggle">
                     <span>Website Maintenance Fee</span>
                     <span class="flex items-center">
-                        <span id="website-maintenance-fee">₹0.00</span>
+                        <span id="website-maintenance-fee"></span>
                         <svg class="w-4 h-4 ml-2 text-gray-600 arrow-icon" fill="currentColor" viewBox="0 0 20 20">
                             <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
                         </svg>
@@ -222,8 +222,8 @@
                 <div id="hosting-platform-toggle" class="flex justify-between items-center py-3 px-4 dropdown-toggle">
                     <span>Hosting Platform Fee</span>
                     <span class="flex items-center">
-                        <span class="text-gray-400 line-through mr-2" id="hosting-platform-original-fee">₹150.00</span>
-                        <span id="hosting-platform-fee">₹100.00</span>
+                        <span class="text-gray-400 line-through mr-2" id="hosting-platform-original-fee"></span>
+                        <span id="hosting-platform-fee"></span>
                         <svg class="w-4 h-4 ml-2 text-gray-600 arrow-icon" fill="currentColor" viewBox="0 0 20 20">
                             <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
                         </svg>
@@ -244,7 +244,7 @@
 
         <div class="text-right text-xl md:text-2xl font-bold text-gray-800 mb-10 p-4 bg-blue-50 rounded-lg">
             <span>TOTAL AMOUNT DUE:</span>
-            <span id="total-amount" class="text-blue-700 ml-4">₹153.51</span>
+            <span id="total-amount" class="text-blue-700 ml-4"></span>
         </div>
 
         <div class="mb-8 p-4 border border-gray-200 rounded-lg bg-gray-50 text-center">
@@ -274,7 +274,7 @@
         <div class="mb-8 p-4 border border-gray-200 rounded-lg bg-gray-50">
             <h3 class="text-lg font-semibold text-gray-800 mb-3">Notes / Remarks</h3>
             <p id="notes-content" class="text-sm text-gray-700 italic">
-                Thank you for your continued partnership. The app performed exceptionally well in <span id="notes-month">July</span>, with minimal cloud usage.
+                Thank you for your continued partnership. The app performed exceptionally well in <span id="notes-month"></span>, with minimal cloud usage.
                 We look forward to supporting Rosnet Academy's digital growth!
             </p>
         </div>
@@ -292,11 +292,11 @@
         window.onload = function() {
             // Invoice Details Variables (Centralized Configuration)
             const INVOICE_DATA = {
-                invoiceNumber: "INV-2025-002",
+                invoiceNumber: "INV-2025-003",
                 invoiceDate: "July 10, 2025",
                 billingPeriodStart: "July 1, 2025",
                 billingPeriodEnd: "July 31, 2025",
-                cloudCost: 3.51, // Numeric value for calculation
+                cloudCost: 3.98, // Numeric value for calculation
                 appMaintenanceOriginal: 100.00,
                 appMaintenanceDiscounted: 50.00,
                 websiteMaintenance: 0.00,
@@ -315,13 +315,13 @@
             const cloudUsageMonthElement = document.getElementById('cloud-usage-month');
 
             const appMaintenanceOriginalFeeElement = document.getElementById('app-maintenance-original-fee');
-            const appMaintenanceFeeElement = document.getElementById('app-maintenance-fee');
+            const appMaintenanceFeeElement = document.getElementById('app-maintenance-fee'); // This needs to display the discounted value
             const appMaintenanceDiscountElement = document.getElementById('app-maintenance-discount');
 
             const websiteMaintenanceFeeElement = document.getElementById('website-maintenance-fee');
 
             const hostingPlatformOriginalFeeElement = document.getElementById('hosting-platform-original-fee');
-            const hostingPlatformFeeElement = document.getElementById('hosting-platform-fee');
+            const hostingPlatformFeeElement = document.getElementById('hosting-platform-fee'); // This needs to display the discounted value
             const hostingPlatformDiscountElement = document.getElementById('hosting-platform-discount');
 
             const totalAmountElement = document.getElementById('total-amount');
@@ -346,7 +346,8 @@
 
             // Helper function to calculate discount percentage
             const calculateDiscountPercentage = (original, discounted) => {
-                if (original === 0) return "0%";
+                if (original === 0) return "0%"; // Avoid division by zero
+                if (original === discounted) return "0%"; // No discount
                 const discount = original - discounted;
                 const percentage = (discount / original) * 100;
                 return `${percentage.toFixed(2)}%`;
@@ -362,15 +363,20 @@
                 cloudUsageMonthElement.textContent = `${INVOICE_DATA.notesMonth} 2025`; // Automatically update year
                 notesMonthElement.textContent = INVOICE_DATA.notesMonth;
 
-                // Update fees
+                // Update original and discounted fees
                 appMaintenanceOriginalFeeElement.textContent = formatCurrency(INVOICE_DATA.appMaintenanceOriginal);
+                // CORRECTED: Set the discounted fee explicitly
                 appMaintenanceFeeElement.textContent = formatCurrency(INVOICE_DATA.appMaintenanceDiscounted);
+
                 websiteMaintenanceFeeElement.textContent = formatCurrency(INVOICE_DATA.websiteMaintenance);
+
                 hostingPlatformOriginalFeeElement.textContent = formatCurrency(INVOICE_DATA.hostingPlatformOriginal);
+                // CORRECTED: Set the discounted fee explicitly
                 hostingPlatformFeeElement.textContent = formatCurrency(INVOICE_DATA.hostingPlatformDiscounted);
 
+
                 // Calculate and display discounts
-                appMaintenanceDiscountElement.textContent = calculateDiscountPercentage(INVOVOICE_DATA.appMaintenanceOriginal, INVOICE_DATA.appMaintenanceDiscounted);
+                appMaintenanceDiscountElement.textContent = calculateDiscountPercentage(INVOICE_DATA.appMaintenanceOriginal, INVOICE_DATA.appMaintenanceDiscounted);
                 hostingPlatformDiscountElement.textContent = calculateDiscountPercentage(INVOICE_DATA.hostingPlatformOriginal, INVOICE_DATA.hostingPlatformDiscounted);
 
                 // Calculate total
@@ -399,7 +405,7 @@
             setupDropdown(websiteMaintenanceToggle, websiteMaintenanceDropdown, websiteMaintenanceArrow);
             setupDropdown(hostingPlatformToggle, hostingPlatformDropdown, hostingPlatformArrow);
 
-            // Initial update of all details
+            // Initial update of all details when the page loads
             updateInvoiceDetails();
         };
     </script>
