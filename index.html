@@ -147,17 +147,18 @@
 
             <div class="text-gray-700 text-sm">
                 <p class="font-semibold text-base mb-1">Niprak</p>
-                <p class="text-xs text-gray-500 mb-1">Software Development & IT Services</p> <p>Nithya Prakash M</p>
+                <p class="text-xs text-gray-500 mb-1">Software Development & IT Services</p>
+                <p>Nithya Prakash M</p>
                 <p>iamnithyaprakash@gmail.com | 7092988131</p>
             </div>
         </header>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-y-4 md:gap-x-8 mb-8 text-sm text-gray-700">
             <div>
-                <p class="mb-2"><strong class="font-medium text-gray-800">Invoice Number:</strong> INV-2025-003</p>
-                <p class="mb-2"><strong class="font-medium text-gray-800">Date:</strong> May 2, 2025</p>
-                <p class="mb-2"><strong class="font-medium text-gray-800">Billing Period:</strong> July 1, 2025 - July 31, 2025</p>
-</div>
+                <p class="mb-2"><strong class="font-medium text-gray-800">Invoice Number:</strong> <span id="invoice-number">INV-2025-002</span></p>
+                <p class="mb-2"><strong class="font-medium text-gray-800">Date:</strong> <span id="invoice-date">July 10, 2025</span></p>
+                <p class="mb-2"><strong class="font-medium text-gray-800">Billing Period:</strong> <span id="billing-period">July 1, 2025 - July 31, 2025</span></p>
+            </div>
             <div class="md:text-right">
                 <p class="mb-2 flex items-center justify-end"><strong class="font-medium text-gray-800 mr-2">Bill To:</strong>
                     <img src="Assets/ic_rosnet.png" alt="Tuition Icon" class="tuition-icon">
@@ -176,15 +177,15 @@
                 <span>Amount (INR)</span>
             </div>
             <div class="flex justify-between items-center py-3 px-4 border-t border-gray-100 text-gray-700 text-base">
-                <span>Google Cloud Usage (July 2025 App Activity)</span>
-                <span id="cloud-cost">₹3.98</span>
+                <span>Google Cloud Usage (<span id="cloud-usage-month">July 2025</span> App Activity)</span>
+                <span id="cloud-cost">₹3.51</span>
             </div>
 
             <div class="border-t border-gray-100 bg-green-50">
                 <div id="app-maintenance-toggle" class="flex justify-between items-center py-3 px-4 dropdown-toggle">
                     <span>App Maintenance & Support Fee</span>
                     <span class="flex items-center">
-                        <span class="text-gray-400 line-through mr-2">₹100.00</span>
+                        <span class="text-gray-400 line-through mr-2" id="app-maintenance-original-fee">₹100.00</span>
                         <span id="app-maintenance-fee">₹50.00</span>
                         <svg class="w-4 h-4 ml-2 text-gray-600 arrow-icon" fill="currentColor" viewBox="0 0 20 20">
                             <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
@@ -194,7 +195,7 @@
                 <div id="app-maintenance-dropdown" class="px-4 text-sm text-gray-600 dropdown-content">
                     <div class="flex justify-between py-1">
                         <span>Discount:</span>
-                        <span>50%</span>
+                        <span id="app-maintenance-discount"></span>
                     </div>
                 </div>
             </div>
@@ -221,7 +222,7 @@
                 <div id="hosting-platform-toggle" class="flex justify-between items-center py-3 px-4 dropdown-toggle">
                     <span>Hosting Platform Fee</span>
                     <span class="flex items-center">
-                        <span class="text-gray-400 line-through mr-2">₹150.00</span>
+                        <span class="text-gray-400 line-through mr-2" id="hosting-platform-original-fee">₹150.00</span>
                         <span id="hosting-platform-fee">₹100.00</span>
                         <svg class="w-4 h-4 ml-2 text-gray-600 arrow-icon" fill="currentColor" viewBox="0 0 20 20">
                             <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
@@ -231,7 +232,8 @@
                 <div id="hosting-platform-dropdown" class="px-4 text-sm text-gray-600 dropdown-content">
                     <div class="flex justify-between py-1">
                         <span>Discount:</span>
-                        <span>33.33%</span> </div>
+                        <span id="hosting-platform-discount"></span>
+                    </div>
                 </div>
             </div>
 
@@ -272,7 +274,7 @@
         <div class="mb-8 p-4 border border-gray-200 rounded-lg bg-gray-50">
             <h3 class="text-lg font-semibold text-gray-800 mb-3">Notes / Remarks</h3>
             <p id="notes-content" class="text-sm text-gray-700 italic">
-                Thank you for your continued partnership. The app performed exceptionally well in July, with minimal cloud usage.
+                Thank you for your continued partnership. The app performed exceptionally well in <span id="notes-month">July</span>, with minimal cloud usage.
                 We look forward to supporting Rosnet Academy's digital growth!
             </p>
         </div>
@@ -288,12 +290,43 @@
     <script>
         // JavaScript for automatic total calculation and GPay button dynamic link
         window.onload = function() {
+            // Invoice Details Variables (Centralized Configuration)
+            const INVOICE_DATA = {
+                invoiceNumber: "INV-2025-002",
+                invoiceDate: "July 10, 2025",
+                billingPeriodStart: "July 1, 2025",
+                billingPeriodEnd: "July 31, 2025",
+                cloudCost: 3.51, // Numeric value for calculation
+                appMaintenanceOriginal: 100.00,
+                appMaintenanceDiscounted: 50.00,
+                websiteMaintenance: 0.00,
+                hostingPlatformOriginal: 150.00,
+                hostingPlatformDiscounted: 100.00,
+                upiId: "iamnithyaprakash@oksbi",
+                upiName: "Nithya Prakash M",
+                notesMonth: "July"
+            };
+
+            // DOM Elements
+            const invoiceNumberElement = document.getElementById('invoice-number');
+            const invoiceDateElement = document.getElementById('invoice-date');
+            const billingPeriodElement = document.getElementById('billing-period');
             const cloudCostElement = document.getElementById('cloud-cost');
+            const cloudUsageMonthElement = document.getElementById('cloud-usage-month');
+
+            const appMaintenanceOriginalFeeElement = document.getElementById('app-maintenance-original-fee');
             const appMaintenanceFeeElement = document.getElementById('app-maintenance-fee');
+            const appMaintenanceDiscountElement = document.getElementById('app-maintenance-discount');
+
             const websiteMaintenanceFeeElement = document.getElementById('website-maintenance-fee');
+
+            const hostingPlatformOriginalFeeElement = document.getElementById('hosting-platform-original-fee');
             const hostingPlatformFeeElement = document.getElementById('hosting-platform-fee');
+            const hostingPlatformDiscountElement = document.getElementById('hosting-platform-discount');
+
             const totalAmountElement = document.getElementById('total-amount');
             const gpayButton = document.getElementById('gpay-button');
+            const notesMonthElement = document.getElementById('notes-month');
 
             // Dropdown elements
             const appMaintenanceToggle = document.getElementById('app-maintenance-toggle');
@@ -308,60 +341,66 @@
             const hostingPlatformDropdown = document.getElementById('hosting-platform-dropdown');
             const hostingPlatformArrow = hostingPlatformToggle.querySelector('.arrow-icon');
 
-
-            // Your UPI ID - IMPORTANT: REPLACE THIS WITH YOUR ACTUAL GOOGLE PAY UPI ID
-            const YOUR_UPI_ID = "iamnithyaprakash@oksbi";
-            const YOUR_NAME = "Nithya Prakash M";
-            const INVOICE_NUMBER = "INV-2025-002"; // Make this dynamic if your invoice numbers change programmatically
-            const BILLING_PERIOD = "July 1, 2025 - July 31, 2025"; // Updated billing period
-            const APP_TYPE = "Android tuition center app and website"; // Updated app type for notes
-
-
-            // Helper function to parse currency string to float
-            const parseCurrency = (text) => parseFloat(text.replace('₹', '').replace(/,/g, ''));
             // Helper function to format float to Indian Rupee currency string
             const formatCurrency = (value) => `₹${value.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
 
-            // Function to calculate and update the total amount and GPay button link
-            function calculateTotalAndSetGPayLink() {
-                const cloudCost = parseCurrency(cloudCostElement.textContent);
-                // Get appMaintenanceFee from the span that holds the actual discounted value
-                const appMaintenanceFee = parseCurrency(appMaintenanceFeeElement.textContent);
-                const websiteMaintenanceFee = parseCurrency(websiteMaintenanceFeeElement.textContent);
-                const hostingPlatformFee = parseCurrency(hostingPlatformFeeElement.textContent);
+            // Helper function to calculate discount percentage
+            const calculateDiscountPercentage = (original, discounted) => {
+                if (original === 0) return "0%";
+                const discount = original - discounted;
+                const percentage = (discount / original) * 100;
+                return `${percentage.toFixed(2)}%`;
+            };
 
-                const total = cloudCost + appMaintenanceFee + websiteMaintenanceFee + hostingPlatformFee;
+            // Function to update all invoice details and calculate total
+            function updateInvoiceDetails() {
+                // Update static text content based on INVOICE_DATA
+                invoiceNumberElement.textContent = INVOICE_DATA.invoiceNumber;
+                invoiceDateElement.textContent = INVOICE_DATA.invoiceDate;
+                billingPeriodElement.textContent = `${INVOICE_DATA.billingPeriodStart} - ${INVOICE_DATA.billingPeriodEnd}`;
+                cloudCostElement.textContent = formatCurrency(INVOICE_DATA.cloudCost);
+                cloudUsageMonthElement.textContent = `${INVOICE_DATA.notesMonth} 2025`; // Automatically update year
+                notesMonthElement.textContent = INVOICE_DATA.notesMonth;
+
+                // Update fees
+                appMaintenanceOriginalFeeElement.textContent = formatCurrency(INVOICE_DATA.appMaintenanceOriginal);
+                appMaintenanceFeeElement.textContent = formatCurrency(INVOICE_DATA.appMaintenanceDiscounted);
+                websiteMaintenanceFeeElement.textContent = formatCurrency(INVOICE_DATA.websiteMaintenance);
+                hostingPlatformOriginalFeeElement.textContent = formatCurrency(INVOICE_DATA.hostingPlatformOriginal);
+                hostingPlatformFeeElement.textContent = formatCurrency(INVOICE_DATA.hostingPlatformDiscounted);
+
+                // Calculate and display discounts
+                appMaintenanceDiscountElement.textContent = calculateDiscountPercentage(INVOVOICE_DATA.appMaintenanceOriginal, INVOICE_DATA.appMaintenanceDiscounted);
+                hostingPlatformDiscountElement.textContent = calculateDiscountPercentage(INVOICE_DATA.hostingPlatformOriginal, INVOICE_DATA.hostingPlatformDiscounted);
+
+                // Calculate total
+                const total = INVOICE_DATA.cloudCost +
+                              INVOICE_DATA.appMaintenanceDiscounted +
+                              INVOICE_DATA.websiteMaintenance +
+                              INVOICE_DATA.hostingPlatformDiscounted;
                 totalAmountElement.textContent = formatCurrency(total);
 
-                const TRANSACTION_NOTE = `Niprak-RosnetAcademy Bill ${INVOICE_NUMBER}`; // Dynamic transaction note
-
-                // Encode the transaction note for URL safety
+                // Construct GPay deep link
+                const TRANSACTION_NOTE = `Niprak-RosnetAcademy Bill ${INVOICE_DATA.invoiceNumber}`;
                 const encodedNote = encodeURIComponent(TRANSACTION_NOTE);
-
-                // Construct the GPay deep link
-                const gpayLink = `upi://pay?pa=${YOUR_UPI_ID}&pn=${encodeURIComponent(YOUR_NAME)}&am=${total.toFixed(2)}&cu=INR&tn=${encodedNote}`;
+                const gpayLink = `upi://pay?pa=${INVOICE_DATA.upiId}&pn=${encodeURIComponent(INVOICE_DATA.upiName)}&am=${total.toFixed(2)}&cu=INR&tn=${encodedNote}`;
                 gpayButton.href = gpayLink;
             }
 
             // Dropdown toggle functionality
-            appMaintenanceToggle.addEventListener('click', () => {
-                appMaintenanceDropdown.classList.toggle('show');
-                appMaintenanceArrow.classList.toggle('rotated');
-            });
+            const setupDropdown = (toggleElement, contentElement, arrowElement) => {
+                toggleElement.addEventListener('click', () => {
+                    contentElement.classList.toggle('show');
+                    arrowElement.classList.toggle('rotated');
+                });
+            };
 
-            websiteMaintenanceToggle.addEventListener('click', () => {
-                websiteMaintenanceDropdown.classList.toggle('show');
-                websiteMaintenanceArrow.classList.toggle('rotated');
-            });
+            setupDropdown(appMaintenanceToggle, appMaintenanceDropdown, appMaintenanceArrow);
+            setupDropdown(websiteMaintenanceToggle, websiteMaintenanceDropdown, websiteMaintenanceArrow);
+            setupDropdown(hostingPlatformToggle, hostingPlatformDropdown, hostingPlatformArrow);
 
-            hostingPlatformToggle.addEventListener('click', () => {
-                hostingPlatformDropdown.classList.toggle('show');
-                hostingPlatformArrow.classList.toggle('rotated');
-            });
-
-
-            // Initial calculation and GPay link setup
-            calculateTotalAndSetGPayLink();
+            // Initial update of all details
+            updateInvoiceDetails();
         };
     </script>
 </body>
