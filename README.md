@@ -2,11 +2,11 @@
 
 # Monthly App Billing Website
 
-This repository contains the HTML, CSS (Tailwind CSS), and JavaScript for the Rosnet Academy Monthly App Billing Invoice.
+This repository contains the Rosnet Academy Monthly App Billing Invoice.
 
 ## Copyright Notice
 
-**© 2025 Nithya Prakash M (Niprak). All Rights Reserved.**
+**© 2026 Nithya Prakash M (Niprak). All Rights Reserved.**
 
 **Unauthorized use, reproduction, distribution, or modification of this code and its design, in whole or in part, is strictly prohibited without the express written permission of Nithya Prakash M.**
 
