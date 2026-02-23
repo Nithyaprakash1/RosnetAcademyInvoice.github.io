@@ -38,8 +38,6 @@
         }
         .arrow-icon { transition: transform 0.3s; }
         .arrow-icon.rotated { transform: rotate(180deg); }
-
-        /* Custom scrollbar for desktop */
         ::-webkit-scrollbar { width: 6px; }
         ::-webkit-scrollbar-thumb { background: #e2e8f0; border-radius: 10px; }
     </style>
@@ -98,21 +96,18 @@
 
             <div class="flex justify-between items-center py-5 px-4 border-b border-gray-50">
                 <div class="flex flex-col">
-                    <span class="text-sm font-semibold text-gray-800">Google Cloud Usage</span>
-                    <span class="text-[10px] text-gray-400 font-bold uppercase tracking-tighter" id="cloud-usage-month"></span>
+                    <span class="text-sm font-semibold text-gray-800">Cloud Run Functions</span>
+                    <span class="text-[10px] text-gray-400 font-bold uppercase tracking-tighter">GCP Compute Instance</span>
                 </div>
-                <span id="cloud-cost" class="font-bold text-gray-900"></span>
+                <span id="cloud-run-cost" class="font-bold text-gray-900"></span>
             </div>
 
-            <div class="flex flex-col md:flex-row md:justify-between md:items-center py-6 px-4 bg-blue-50/50 border-b border-blue-100/50 gap-3">
-                <div class="flex flex-col flex-1">
-                    <div class="flex flex-wrap items-center gap-2 mb-1">
-                        <span class="text-sm font-bold text-blue-900 leading-none">Console License & Server Access</span>
-                        <span class="bg-blue-600 text-white text-[8px] px-2 py-0.5 rounded-sm font-black uppercase tracking-widest">One-Time</span>
-                    </div>
-                    <span class="text-[11px] text-blue-700/70 leading-relaxed max-w-sm">Google Cloud provider approval for high-tier API access.</span>
+            <div class="flex justify-between items-center py-5 px-4 border-b border-gray-50">
+                <div class="flex flex-col">
+                    <span class="text-sm font-semibold text-gray-800">App Engine</span>
+                    <span class="text-[10px] text-gray-400 font-bold uppercase tracking-tighter">Hosting & Orchestration</span>
                 </div>
-                <span id="annual-server-fee" class="font-black text-blue-700 text-xl"></span>
+                <span id="app-engine-cost" class="font-bold text-gray-900"></span>
             </div>
 
             <div class="divide-y divide-gray-50">
@@ -179,7 +174,7 @@
         <div class="bg-blue-600 rounded-[32px] p-8 md:p-12 text-center text-white mb-8">
             <h3 class="text-xs font-black uppercase tracking-[0.4em] mb-6 opacity-80">Payment Portal</h3>
             <a id="gpay-button" href="#" class="inline-flex items-center justify-center bg-white text-blue-600 font-black py-4 px-10 rounded-2xl transition-transform active:scale-95 shadow-xl mb-10">
-                <img width="24" src="https://img.icons8.com/fluency/50/google-pay.png" class="mr-3"/>
+                <img width="24" src="https://img.icons8.com/fluency/50/google-pay.png" class="mr-3" alt="GPay"/>
                 PAY NOW
             </a>
             <div class="relative">
@@ -193,7 +188,7 @@
         <div class="bg-orange-50/50 border border-orange-100 rounded-2xl p-6">
             <h4 class="text-xs font-black text-orange-800 uppercase tracking-widest mb-2">Technical Remarks</h4>
             <p class="text-sm text-orange-900/70 leading-relaxed italic">
-                December usage (₹0.46) shows high server efficiency. The ₹500.00 is a **one-time annual setup** for Google Cloud Console synchronization, required for full API access and app security updates.
+                Billing reflective of Jan 2026 usage cycles. High server efficiency maintained across Cloud Run and App Engine modules.
             </p>
         </div>
 
@@ -205,18 +200,17 @@
 <script>
 window.onload = function() {
     const DATA = {
-        inv: "INV-2026-DEC",
-        date: "January 9, 2026",
-        start: "December 1, 2025",
-        end: "December 31, 2025",
-        cloud: 0.46,
-        serverAccess: 500.00,
+        inv: "INV-2026-JAN",
+        date: "February 2, 2026",
+        start: "January 1, 2026",
+        end: "January 31, 2026",
+        cloudRun: 11.25,
+        appEngine: 4.53,
         appOrig: 200.00, appFinal: 50.00,
         webOrig: 100.00, webFinal: 80.00,
         hostOrig: 189.00, hostFinal: 100.00,
         upi: "iamnithyaprakash@oksbi",
-        name: "Nithya Prakash M",
-        month: "Dec 2025 Cycle"
+        name: "Nithya Prakash M"
     };
 
     const fmt = v => `₹${v.toLocaleString('en-IN',{minimumFractionDigits:2})}`;
@@ -225,9 +219,9 @@ window.onload = function() {
     document.getElementById('invoice-number').textContent = DATA.inv;
     document.getElementById('invoice-date').textContent = DATA.date;
     document.getElementById('billing-period').textContent = `${DATA.start} - ${DATA.end}`;
-    document.getElementById('cloud-cost').textContent = fmt(DATA.cloud);
-    document.getElementById('cloud-usage-month').textContent = DATA.month;
-    document.getElementById('annual-server-fee').textContent = fmt(DATA.serverAccess);
+    
+    document.getElementById('cloud-run-cost').textContent = fmt(DATA.cloudRun);
+    document.getElementById('app-engine-cost').textContent = fmt(DATA.appEngine);
 
     document.getElementById('app-orig').textContent = fmt(DATA.appOrig);
     document.getElementById('app-final').textContent = fmt(DATA.appFinal);
@@ -241,7 +235,7 @@ window.onload = function() {
     document.getElementById('host-final').textContent = fmt(DATA.hostFinal);
     document.getElementById('host-disc').textContent = disc(DATA.hostOrig, DATA.hostFinal);
 
-    const total = DATA.cloud + DATA.serverAccess + DATA.appFinal + DATA.webFinal + DATA.hostFinal;
+    const total = DATA.cloudRun + DATA.appEngine + DATA.appFinal + DATA.webFinal + DATA.hostFinal;
     document.getElementById('total-amount').textContent = fmt(total);
 
     const upiLink = `upi://pay?pa=${DATA.upi}&pn=${encodeURIComponent(DATA.name)}&am=${total.toFixed(2)}&cu=INR&tn=${encodeURIComponent('Niprak-Rosnet '+DATA.inv)}`;
@@ -250,10 +244,12 @@ window.onload = function() {
     const setup = (tId, dId) => {
         const t = document.getElementById(tId);
         const d = document.getElementById(dId);
-        t.onclick = () => {
-            d.classList.toggle('show');
-            t.querySelector('.arrow-icon').classList.toggle('rotated');
-        };
+        if(t && d) {
+            t.onclick = () => {
+                d.classList.toggle('show');
+                t.querySelector('.arrow-icon').classList.toggle('rotated');
+            };
+        }
     };
     setup('app-toggle', 'app-drop');
     setup('web-toggle', 'web-drop');
