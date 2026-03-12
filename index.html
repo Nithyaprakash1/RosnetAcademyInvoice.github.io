@@ -1,10 +1,10 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Invoice - Rosnet Academy</title>
-
 <script src="https://cdn.tailwindcss.com"></script>
 
 <style>
@@ -26,6 +26,7 @@ max-width:800px;
 background:white;
 box-shadow:0 20px 50px rgba(0,0,0,0.05);
 border-radius:24px;
+position:relative;
 overflow:hidden;
 }
 
@@ -55,7 +56,6 @@ padding-bottom:12px;
 <div class="invoice-container p-5 sm:p-8 md:p-12">
 
 <div class="flex flex-col items-center text-center mb-10">
-
 <span class="bg-blue-600 text-white px-4 py-1 rounded-full text-[10px] font-black tracking-widest uppercase mb-4 shadow-lg shadow-blue-200">
 Payment Due Today
 </span>
@@ -67,7 +67,6 @@ INVOICE
 <p class="text-gray-400 font-medium text-sm md:text-base tracking-wide uppercase">
 Infrastructure & Maintenance
 </p>
-
 </div>
 
 <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12 border-b border-gray-100 pb-10">
@@ -92,7 +91,6 @@ Infrastructure & Maintenance
 </div>
 
 <div class="md:text-right space-y-1">
-
 <p class="text-[10px] font-black text-blue-600 uppercase tracking-widest mb-2">
 Service Provider
 </p>
@@ -101,7 +99,6 @@ Service Provider
 <p class="text-gray-600 font-medium">Nithya Prakash M</p>
 <p class="text-gray-400 text-xs break-all">iamnithyaprakash@gmail.com</p>
 <p class="text-gray-400 text-xs">7092988131</p>
-
 </div>
 
 </div>
@@ -112,7 +109,6 @@ Service Provider
 <p class="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-1">
 Bill To
 </p>
-
 <h2 class="text-xl font-bold text-gray-800">
 Rosnet Academy
 </h2>
@@ -148,6 +144,90 @@ GCP Compute Instance
 
 </div>
 
+<div class="divide-y divide-gray-50">
+
+<div id="app-toggle" class="cursor-pointer hover:bg-gray-50 transition-colors">
+<div class="flex justify-between items-center py-5 px-4">
+
+<span class="text-sm font-medium text-gray-700 italic">
+App Maintenance Support
+</span>
+
+<div class="flex items-center gap-3">
+<span class="text-gray-300 line-through text-xs" id="app-orig"></span>
+<span id="app-final" class="font-bold text-gray-900"></span>
+
+<svg class="w-4 h-4 arrow-icon text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+<path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"/>
+</svg>
+</div>
+
+</div>
+
+<div id="app-drop" class="px-4 dropdown-content">
+<div class="bg-gray-50 rounded-xl p-3 flex justify-between text-[11px]">
+<span class="text-gray-400">Rosnet Partner Discount:</span>
+<span id="app-disc" class="text-green-600 font-bold"></span>
+</div>
+</div>
+
+</div>
+
+<div id="web-toggle" class="cursor-pointer hover:bg-gray-50 transition-colors">
+<div class="flex justify-between items-center py-5 px-4">
+
+<span class="text-sm font-medium text-gray-700 italic">
+Website Maintenance
+</span>
+
+<div class="flex items-center gap-3">
+<span class="text-gray-300 line-through text-xs" id="web-orig"></span>
+<span id="web-final" class="font-bold text-gray-900"></span>
+
+<svg class="w-4 h-4 arrow-icon text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+<path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"/>
+</svg>
+</div>
+
+</div>
+
+<div id="web-drop" class="px-4 dropdown-content">
+<div class="bg-gray-50 rounded-xl p-3 flex justify-between text-[11px]">
+<span class="text-gray-400">Rosnet Partner Discount:</span>
+<span id="web-disc" class="text-green-600 font-bold"></span>
+</div>
+</div>
+
+</div>
+
+<div id="host-toggle" class="cursor-pointer hover:bg-gray-50 transition-colors">
+<div class="flex justify-between items-center py-5 px-4">
+
+<span class="text-sm font-medium text-gray-700 italic">
+Hosting Platform Fee
+</span>
+
+<div class="flex items-center gap-3">
+<span class="text-gray-300 line-through text-xs" id="host-orig"></span>
+<span id="host-final" class="font-bold text-gray-900"></span>
+
+<svg class="w-4 h-4 arrow-icon text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+<path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"/>
+</svg>
+
+</div>
+</div>
+
+<div id="host-drop" class="px-4 dropdown-content">
+<div class="bg-gray-50 rounded-xl p-3 flex justify-between text-[11px]">
+<span class="text-gray-400">Rosnet Partner Discount:</span>
+<span id="host-disc" class="text-green-600 font-bold"></span>
+</div>
+</div>
+
+</div>
+
+</div>
 </div>
 
 <div class="flex flex-col items-end mb-12">
@@ -161,36 +241,6 @@ Grand Total Due
 <span id="total-amount" class="text-4xl font-black"></span>
 
 </div>
-
-</div>
-
-<div class="bg-blue-600 rounded-[32px] p-8 md:p-12 text-center text-white mb-8">
-
-<h3 class="text-xs font-black uppercase tracking-[0.4em] mb-6 opacity-80">
-Payment Portal
-</h3>
-
-<a id="gpay-button" href="#" class="inline-flex items-center justify-center bg-white text-blue-600 font-black py-4 px-10 rounded-2xl transition-transform active:scale-95 shadow-xl mb-10">
-
-<img width="24" src="https://img.icons8.com/fluency/50/google-pay.png" class="mr-3">
-
-PAY NOW
-
-</a>
-
-<div class="relative">
-
-<div class="bg-white p-4 rounded-3xl inline-block shadow-2xl">
-
-<img src="Assets/gpay_qr.jpg" class="w-40 h-40 md:w-52 md:h-52 rounded-2xl">
-
-</div>
-
-</div>
-
-<p class="text-[10px] mt-8 opacity-60 font-medium">
-Please share the transaction ID or screenshot after payment.
-</p>
 
 </div>
 
@@ -210,11 +260,18 @@ date:"March 1, 2026",
 start:"February 1, 2026",
 end:"February 28, 2026",
 cloudRun:6.84,
+appOrig:200.00,
+appFinal:50.00,
+webOrig:100.00,
+webFinal:80.00,
+hostOrig:189.00,
+hostFinal:100.00,
 upi:"iamnithyaprakash@oksbi",
 name:"Nithya Prakash M"
 };
 
 const fmt=v=>`₹${v.toLocaleString('en-IN',{minimumFractionDigits:2})}`;
+const disc=(o,f)=>`${(((o-f)/o)*100).toFixed(0)}% Reserved Discount`;
 
 document.getElementById('invoice-number').textContent=DATA.inv;
 document.getElementById('invoice-date').textContent=DATA.date;
@@ -222,9 +279,23 @@ document.getElementById('billing-period').textContent=`${DATA.start} - ${DATA.en
 
 document.getElementById('cloud-run-cost').textContent=fmt(DATA.cloudRun);
 
-document.getElementById('total-amount').textContent=fmt(DATA.cloudRun);
+document.getElementById('app-orig').textContent=fmt(DATA.appOrig);
+document.getElementById('app-final').textContent=fmt(DATA.appFinal);
+document.getElementById('app-disc').textContent=disc(DATA.appOrig,DATA.appFinal);
 
-const upiLink=`upi://pay?pa=${DATA.upi}&pn=${encodeURIComponent(DATA.name)}&am=${DATA.cloudRun.toFixed(2)}&cu=INR&tn=${encodeURIComponent('Niprak-Rosnet '+DATA.inv)}`;
+document.getElementById('web-orig').textContent=fmt(DATA.webOrig);
+document.getElementById('web-final').textContent=fmt(DATA.webFinal);
+document.getElementById('web-disc').textContent=disc(DATA.webOrig,DATA.webFinal);
+
+document.getElementById('host-orig').textContent=fmt(DATA.hostOrig);
+document.getElementById('host-final').textContent=fmt(DATA.hostFinal);
+document.getElementById('host-disc').textContent=disc(DATA.hostOrig,DATA.hostFinal);
+
+const total=DATA.cloudRun+DATA.appFinal+DATA.webFinal+DATA.hostFinal;
+
+document.getElementById('total-amount').textContent=fmt(total);
+
+const upiLink=`upi://pay?pa=${DATA.upi}&pn=${encodeURIComponent(DATA.name)}&am=${total.toFixed(2)}&cu=INR&tn=${encodeURIComponent('Niprak-Rosnet '+DATA.inv)}`;
 
 document.getElementById('gpay-button').href=upiLink;
 
