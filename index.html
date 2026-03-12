@@ -1,372 +1,261 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Invoice - Rosnet Academy</title>
-
-<script src="https://cdn.tailwindcss.com"></script>
-
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&display=swap');
-
-body{
-font-family:'Inter',sans-serif;
-background:linear-gradient(135deg,#f0f4ff 0%,#fff5f0 100%);
-min-height:100vh;
-display:flex;
-justify-content:center;
-align-items:flex-start;
-padding:1rem;
-}
-
-.invoice-container{
-width:100%;
-max-width:800px;
-background:white;
-box-shadow:0 20px 50px rgba(0,0,0,0.05);
-border-radius:24px;
-position:relative;
-overflow:hidden;
-}
-
-.dropdown-content{
-max-height:0;
-overflow:hidden;
-transition:all .3s ease-out;
-opacity:0;
-}
-
-.dropdown-content.show{
-max-height:100px;
-opacity:1;
-padding-bottom:12px;
-}
-
-.arrow-icon{transition:transform .3s;}
-.arrow-icon.rotated{transform:rotate(180deg);}
-
-::-webkit-scrollbar{width:6px;}
-::-webkit-scrollbar-thumb{background:#e2e8f0;border-radius:10px;}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invoice - Rosnet Academy</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #f0f4ff 0%, #fff5f0 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            padding: 1rem;
+        }
+        .invoice-container {
+            width: 100%;
+            max-width: 800px;
+            background: white;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.05);
+            border-radius: 24px;
+            position: relative;
+            overflow: hidden;
+        }
+        .dropdown-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.3s ease-out;
+            opacity: 0;
+        }
+        .dropdown-content.show {
+            max-height: 100px;
+            opacity: 1;
+            padding-bottom: 12px;
+        }
+        .arrow-icon { transition: transform 0.3s; }
+        .arrow-icon.rotated { transform: rotate(180deg); }
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-thumb { background: #e2e8f0; border-radius: 10px; }
+    </style>
 </head>
-
 <body>
-
-<div class="invoice-container p-5 sm:p-8 md:p-12">
-
-<div class="flex flex-col items-center text-center mb-10">
-<span class="bg-blue-600 text-white px-4 py-1 rounded-full text-[10px] font-black tracking-widest uppercase mb-4 shadow-lg shadow-blue-200">
-Payment Due Today
-</span>
-
-<h1 class="text-4xl md:text-6xl font-extralight tracking-tighter text-gray-800 mb-2 italic">
-INVOICE
-</h1>
-
-<p class="text-gray-400 font-medium text-sm md:text-base tracking-wide uppercase">
-Infrastructure & Maintenance
-</p>
-</div>
-
-<div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12 border-b border-gray-100 pb-10">
-
-<div class="space-y-3 text-sm">
-
-<div class="flex justify-between md:justify-start">
-<span class="text-gray-400 w-24">Invoice No:</span>
-<span class="font-bold text-gray-800" id="invoice-number"></span>
-</div>
-
-<div class="flex justify-between md:justify-start">
-<span class="text-gray-400 w-24">Bill Date:</span>
-<span class="font-bold text-gray-800" id="invoice-date"></span>
-</div>
-
-<div class="flex justify-between md:justify-start">
-<span class="text-gray-400 w-24">Billing Period:</span>
-<span class="font-bold text-gray-800" id="billing-period"></span>
-</div>
-
-</div>
-
-<div class="md:text-right space-y-1">
-
-<p class="text-[10px] font-black text-blue-600 uppercase tracking-widest mb-2">
-Service Provider
-</p>
-
-<p class="font-bold text-gray-900 text-lg">Niprak</p>
-<p class="text-gray-600 font-medium">Nithya Prakash M</p>
-<p class="text-gray-400 text-xs break-all">iamnithyaprakash@gmail.com</p>
-<p class="text-gray-400 text-xs">7092988131</p>
-
-</div>
-
-</div>
-
-
-<div class="mb-10 p-6 bg-gray-50 rounded-2xl flex flex-col md:flex-row md:justify-between items-start md:items-center gap-4">
-
-<div>
-<p class="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-1">
-Bill To
-</p>
-
-<h2 class="text-xl font-bold text-gray-800">
-Rosnet Academy
-</h2>
-</div>
-
-<div class="text-sm text-gray-500 md:text-right">
-<p>Umapathi Towers, Masakalipalayam Rd,</p>
-<p>Coimbatore - 641 004</p>
-</div>
-
-</div>
-
-
-<div class="mb-8 overflow-hidden">
-
-<div class="hidden md:flex justify-between px-4 py-2 text-[10px] font-black text-gray-400 uppercase tracking-widest border-b border-gray-100">
-<span>Description</span>
-<span>Amount</span>
-</div>
-
-<div class="flex justify-between items-center py-5 px-4 border-b border-gray-50">
-
-<div class="flex flex-col">
-<span class="text-sm font-semibold text-gray-800">Cloud Run Functions</span>
-<span class="text-[10px] text-gray-400 font-bold uppercase tracking-tighter">
-GCP Compute Instance
-</span>
-</div>
-
-<span id="cloud-run-cost" class="font-bold text-gray-900"></span>
-
-</div>
-
-
-<div class="flex justify-between items-center py-5 px-4 border-b border-gray-50">
-
-<div class="flex flex-col">
-<span class="text-sm font-semibold text-gray-800">App Engine</span>
-<span class="text-[10px] text-gray-400 font-bold uppercase tracking-tighter">
-Hosting & Orchestration
-</span>
-</div>
-
-<span id="app-engine-cost" class="font-bold text-gray-900"></span>
-
-</div>
-
-
-<div class="divide-y divide-gray-50">
-
-<div id="app-toggle" class="cursor-pointer hover:bg-gray-50 transition-colors">
-
-<div class="flex justify-between items-center py-5 px-4">
-
-<span class="text-sm font-medium text-gray-700 italic">
-App Maintenance Support
-</span>
-
-<div class="flex items-center gap-3">
-<span class="text-gray-300 line-through text-xs" id="app-orig"></span>
-<span id="app-final" class="font-bold text-gray-900"></span>
-
-<svg class="w-4 h-4 arrow-icon text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-<path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"/>
-</svg>
-
-</div>
-
-</div>
-
-<div id="app-drop" class="px-4 dropdown-content">
-
-<div class="bg-gray-50 rounded-xl p-3 flex justify-between text-[11px]">
-
-<span class="text-gray-400">
-Rosnet Partner Discount:
-</span>
-
-<span id="app-disc" class="text-green-600 font-bold"></span>
-
-</div>
-
-</div>
-
-</div>
-
-
-<div id="web-toggle" class="cursor-pointer hover:bg-gray-50 transition-colors">
-
-<div class="flex justify-between items-center py-5 px-4">
-
-<span class="text-sm font-medium text-gray-700 italic">
-Website Maintenance
-</span>
-
-<div class="flex items-center gap-3">
-
-<span class="text-gray-300 line-through text-xs" id="web-orig"></span>
-<span id="web-final" class="font-bold text-gray-900"></span>
-
-<svg class="w-4 h-4 arrow-icon text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-<path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"/>
-</svg>
-
-</div>
-
-</div>
-
-<div id="web-drop" class="px-4 dropdown-content">
-
-<div class="bg-gray-50 rounded-xl p-3 flex justify-between text-[11px]">
-
-<span class="text-gray-400">
-Rosnet Partner Discount:
-</span>
-
-<span id="web-disc" class="text-green-600 font-bold"></span>
-
-</div>
-
-</div>
-
-</div>
-
-
-<div id="host-toggle" class="cursor-pointer hover:bg-gray-50 transition-colors">
-
-<div class="flex justify-between items-center py-5 px-4">
-
-<span class="text-sm font-medium text-gray-700 italic">
-Hosting Platform Fee
-</span>
-
-<div class="flex items-center gap-3">
-
-<span class="text-gray-300 line-through text-xs" id="host-orig"></span>
-<span id="host-final" class="font-bold text-gray-900"></span>
-
-<svg class="w-4 h-4 arrow-icon text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-<path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"/>
-</svg>
-
-</div>
-
-</div>
-
-<div id="host-drop" class="px-4 dropdown-content">
-
-<div class="bg-gray-50 rounded-xl p-3 flex justify-between text-[11px]">
-
-<span class="text-gray-400">
-Rosnet Partner Discount:
-</span>
-
-<span id="host-disc" class="text-green-600 font-bold"></span>
-
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-
-<div class="flex flex-col items-end mb-12">
-
-<div class="bg-gray-900 text-white p-6 rounded-3xl w-full md:w-80 shadow-2xl shadow-gray-200">
-
-<span class="text-[10px] font-black uppercase tracking-[0.3em] text-gray-400 block mb-2">
-Grand Total Due
-</span>
-
-<span id="total-amount" class="text-4xl font-black"></span>
-
-</div>
-
-</div>
-
-
-<footer class="text-center mt-12 text-[10px] font-bold text-gray-300 uppercase tracking-[0.5em]">
-© 2026 Niprak Labs
-</footer>
-
-</div>
-
+    <div class="invoice-container p-5 sm:p-8 md:p-12">
+        <div class="flex flex-col items-center text-center mb-10">
+            <span class="bg-blue-600 text-white px-4 py-1 rounded-full text-[10px] font-black tracking-widest uppercase mb-4 shadow-lg shadow-blue-200">
+                Payment Due Today
+            </span>
+            <h1 class="text-4xl md:text-6xl font-extralight tracking-tighter text-gray-800 mb-2 italic">INVOICE</h1>
+            <p class="text-gray-400 font-medium text-sm md:text-base tracking-wide uppercase">Infrastructure & Maintenance</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12 border-b border-gray-100 pb-10">
+            <div class="space-y-3 text-sm">
+                <div class="flex justify-between md:justify-start">
+                    <span class="text-gray-400 w-24">Invoice No:</span>
+                    <span class="font-bold text-gray-800" id="invoice-number"></span>
+                </div>
+                <div class="flex justify-between md:justify-start">
+                    <span class="text-gray-400 w-24">Bill Date:</span>
+                    <span class="font-bold text-gray-800" id="invoice-date"></span>
+                </div>
+                <div class="flex justify-between md:justify-start">
+                    <span class="text-gray-400 w-24">Billing Period:</span>
+                    <span class="font-bold text-gray-800" id="billing-period"></span>
+                </div>
+            </div>
+
+            <div class="md:text-right space-y-1">
+                <p class="text-[10px] font-black text-blue-600 uppercase tracking-widest mb-2">Service Provider</p>
+                <p class="font-bold text-gray-900 text-lg">Niprak</p>
+                <p class="text-gray-600 font-medium">Nithya Prakash M</p>
+                <p class="text-gray-400 text-xs break-all">iamnithyaprakash@gmail.com</p>
+                <p class="text-gray-400 text-xs">7092988131</p>
+            </div>
+        </div>
+
+        <div class="mb-10 p-6 bg-gray-50 rounded-2xl flex flex-col md:flex-row md:justify-between items-start md:items-center gap-4">
+            <div>
+                <p class="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-1">Bill To</p>
+                <h2 class="text-xl font-bold text-gray-800">Rosnet Academy</h2>
+            </div>
+            <div class="text-sm text-gray-500 md:text-right">
+                <p>Umapathi Towers, Masakalipalayam Rd,</p>
+                <p>Coimbatore - 641 004</p>
+            </div>
+        </div>
+
+        <div class="mb-8 overflow-hidden">
+            <div class="hidden md:flex justify-between px-4 py-2 text-[10px] font-black text-gray-400 uppercase tracking-widest border-b border-gray-100">
+                <span>Description</span>
+                <span>Amount</span>
+            </div>
+
+            <div class="flex justify-between items-center py-5 px-4 border-b border-gray-50">
+                <div class="flex flex-col">
+                    <span class="text-sm font-semibold text-gray-800">Cloud Run Functions</span>
+                    <span class="text-[10px] text-gray-400 font-bold uppercase tracking-tighter">GCP Compute Instance</span>
+                </div>
+                <span id="cloud-run-cost" class="font-bold text-gray-900"></span>
+            </div>
+
+            <div class="flex justify-between items-center py-5 px-4 border-b border-gray-50">
+                <div class="flex flex-col">
+                    <span class="text-sm font-semibold text-gray-800">App Engine</span>
+                    <span class="text-[10px] text-gray-400 font-bold uppercase tracking-tighter">Hosting & Orchestration</span>
+                </div>
+                <span id="app-engine-cost" class="font-bold text-gray-900"></span>
+            </div>
+
+            <div class="divide-y divide-gray-50">
+                <div id="app-toggle" class="cursor-pointer hover:bg-gray-50 transition-colors">
+                    <div class="flex justify-between items-center py-5 px-4">
+                        <span class="text-sm font-medium text-gray-700 italic">App Maintenance Support</span>
+                        <div class="flex items-center gap-3">
+                            <span class="text-gray-300 line-through text-xs" id="app-orig"></span>
+                            <span id="app-final" class="font-bold text-gray-900"></span>
+                            <svg class="w-4 h-4 arrow-icon text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"/></svg>
+                        </div>
+                    </div>
+                    <div id="app-drop" class="px-4 dropdown-content">
+                        <div class="bg-gray-50 rounded-xl p-3 flex justify-between text-[11px]">
+                            <span class="text-gray-400">Rosnet Partner Discount:</span>
+                            <span id="app-disc" class="text-green-600 font-bold"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="web-toggle" class="cursor-pointer hover:bg-gray-50 transition-colors">
+                    <div class="flex justify-between items-center py-5 px-4">
+                        <span class="text-sm font-medium text-gray-700 italic">Website Maintenance</span>
+                        <div class="flex items-center gap-3">
+                            <span class="text-gray-300 line-through text-xs" id="web-orig"></span>
+                            <span id="web-final" class="font-bold text-gray-900"></span>
+                            <svg class="w-4 h-4 arrow-icon text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"/></svg>
+                        </div>
+                    </div>
+                    <div id="web-drop" class="px-4 dropdown-content">
+                        <div class="bg-gray-50 rounded-xl p-3 flex justify-between text-[11px]">
+                            <span class="text-gray-400">Rosnet Partner Discount:</span>
+                            <span id="web-disc" class="text-green-600 font-bold"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="host-toggle" class="cursor-pointer hover:bg-gray-50 transition-colors">
+                    <div class="flex justify-between items-center py-5 px-4">
+                        <span class="text-sm font-medium text-gray-700 italic">Hosting Platform Fee</span>
+                        <div class="flex items-center gap-3">
+                            <span class="text-gray-300 line-through text-xs" id="host-orig"></span>
+                            <span id="host-final" class="font-bold text-gray-900"></span>
+                            <svg class="w-4 h-4 arrow-icon text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"/></svg>
+                        </div>
+                    </div>
+                    <div id="host-drop" class="px-4 dropdown-content">
+                        <div class="bg-gray-50 rounded-xl p-3 flex justify-between text-[11px]">
+                            <span class="text-gray-400">Rosnet Partner Discount:</span>
+                            <span id="host-disc" class="text-green-600 font-bold"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="flex flex-col items-end mb-12">
+            <div class="bg-gray-900 text-white p-6 rounded-3xl w-full md:w-80 shadow-2xl shadow-gray-200">
+                <span class="text-[10px] font-black uppercase tracking-[0.3em] text-gray-400 block mb-2">Grand Total Due</span>
+                <span id="total-amount" class="text-4xl font-black"></span>
+            </div>
+        </div>
+
+        <div class="bg-blue-600 rounded-[32px] p-8 md:p-12 text-center text-white mb-8">
+            <h3 class="text-xs font-black uppercase tracking-[0.4em] mb-6 opacity-80">Payment Portal</h3>
+            <a id="gpay-button" href="#" class="inline-flex items-center justify-center bg-white text-blue-600 font-black py-4 px-10 rounded-2xl transition-transform active:scale-95 shadow-xl mb-10">
+                <img width="24" src="https://img.icons8.com/fluency/50/google-pay.png" class="mr-3" alt="GPay"/>
+                PAY NOW
+            </a>
+            <div class="relative">
+                <div class="bg-white p-4 rounded-3xl inline-block shadow-2xl">
+                    <!-- Updated with a generic placeholder since the original local asset isn't provided -->
+                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=upi://pay?pa=iamnithyaprakash@oksbi" alt="QR Code" class="w-40 h-40 md:w-52 md:h-52 rounded-2xl">
+                </div>
+            </div>
+            <p class="text-[10px] mt-8 opacity-60 font-medium">Please share the transaction ID or screenshot after payment.</p>
+        </div>
+
+        <div class="bg-orange-50/50 border border-orange-100 rounded-2xl p-6">
+            <h4 class="text-xs font-black text-orange-800 uppercase tracking-widest mb-2">Technical Remarks</h4>
+            <p class="text-sm text-orange-900/70 leading-relaxed italic" id="tech-remarks">
+                Billing reflective of Feb 2026 usage cycles. High server efficiency maintained across Cloud Run and App Engine modules.
+            </p>
+        </div>
+
+        <footer class="text-center mt-12 text-[10px] font-bold text-gray-300 uppercase tracking-[0.5em]">
+            &copy; 2026 Niprak Labs
+        </footer>
+    </div>
 
 <script>
+window.onload = function() {
+    const DATA = {
+        inv: "INV-2026-FEB",
+        date: "March 2, 2026",
+        start: "February 1, 2026",
+        end: "February 28, 2026",
+        cloudRun: 6.85,
+        appEngine: 4.53, // Restored as it was used in calculation
+        appOrig: 200.00, appFinal: 50.00,
+        webOrig: 100.00, webFinal: 80.00,
+        hostOrig: 189.00, hostFinal: 100.00,
+        upi: "iamnithyaprakash@oksbi",
+        name: "Nithya Prakash M"
+    };
 
-window.onload=function(){
+    const fmt = v => `₹${v.toLocaleString('en-IN',{minimumFractionDigits:2})}`;
+    const disc = (o, f) => `${(((o-f)/o)*100).toFixed(0)}% Reserved Discount;`;
 
-const DATA={
+    document.getElementById('invoice-number').textContent = DATA.inv;
+    document.getElementById('invoice-date').textContent = DATA.date;
+    document.getElementById('billing-period').textContent = `${DATA.start} - ${DATA.end}`;
+    
+    document.getElementById('cloud-run-cost').textContent = fmt(DATA.cloudRun);
+    document.getElementById('app-engine-cost').textContent = fmt(DATA.appEngine);
 
-inv:"INV-2026-FEB",
-date:"March 1, 2026",
+    document.getElementById('app-orig').textContent = fmt(DATA.appOrig);
+    document.getElementById('app-final').textContent = fmt(DATA.appFinal);
+    document.getElementById('app-disc').textContent = disc(DATA.appOrig, DATA.appFinal);
 
-start:"February 1, 2026",
-end:"February 28, 2026",
+    document.getElementById('web-orig').textContent = fmt(DATA.webOrig);
+    document.getElementById('web-final').textContent = fmt(DATA.webFinal);
+    document.getElementById('web-disc').textContent = disc(DATA.webOrig, DATA.webFinal);
 
-cloudRun:6.85,
-appEngine:4.53,
+    document.getElementById('host-orig').textContent = fmt(DATA.hostOrig);
+    document.getElementById('host-final').textContent = fmt(DATA.hostFinal);
+    document.getElementById('host-disc').textContent = disc(DATA.hostOrig, DATA.hostFinal);
 
-appOrig:200.00,
-appFinal:50.00,
+    const total = DATA.cloudRun + DATA.appEngine + DATA.appFinal + DATA.webFinal + DATA.hostFinal;
+    document.getElementById('total-amount').textContent = fmt(total);
 
-webOrig:100.00,
-webFinal:80.00,
+    const upiLink = `upi://pay?pa=${DATA.upi}&pn=${encodeURIComponent(DATA.name)}&am=${total.toFixed(2)}&cu=INR&tn=${encodeURIComponent('Niprak-Rosnet '+DATA.inv)}`;
+    document.getElementById('gpay-button').href = upiLink;
 
-hostOrig:189.00,
-hostFinal:100.00,
-
-upi:"iamnithyaprakash@oksbi",
-name:"Nithya Prakash M"
-
+    const setup = (tId, dId) => {
+        const t = document.getElementById(tId);
+        const d = document.getElementById(dId);
+        if(t && d) {
+            t.onclick = () => {
+                d.classList.toggle('show');
+                t.querySelector('.arrow-icon').classList.toggle('rotated');
+            };
+        }
+    };
+    setup('app-toggle', 'app-drop');
+    setup('web-toggle', 'web-drop');
+    setup('host-toggle', 'host-drop');
 };
-
-const fmt=v=>`₹${v.toLocaleString('en-IN',{minimumFractionDigits:2})}`;
-const disc=(o,f)=>`${(((o-f)/o)*100).toFixed(0)}% Reserved Discount`;
-
-document.getElementById("invoice-number").textContent=DATA.inv;
-document.getElementById("invoice-date").textContent=DATA.date;
-
-document.getElementById("billing-period").textContent=
-`${DATA.start} - ${DATA.end}`;
-
-document.getElementById("cloud-run-cost").textContent=fmt(DATA.cloudRun);
-document.getElementById("app-engine-cost").textContent=fmt(DATA.appEngine);
-
-document.getElementById("app-orig").textContent=fmt(DATA.appOrig);
-document.getElementById("app-final").textContent=fmt(DATA.appFinal);
-document.getElementById("app-disc").textContent=disc(DATA.appOrig,DATA.appFinal);
-
-document.getElementById("web-orig").textContent=fmt(DATA.webOrig);
-document.getElementById("web-final").textContent=fmt(DATA.webFinal);
-document.getElementById("web-disc").textContent=disc(DATA.webOrig,DATA.webFinal);
-
-document.getElementById("host-orig").textContent=fmt(DATA.hostOrig);
-document.getElementById("host-final").textContent=fmt(DATA.hostFinal);
-document.getElementById("host-disc").textContent=disc(DATA.hostOrig,DATA.hostFinal);
-
-const total=
-DATA.cloudRun+
-DATA.appEngine+
-DATA.appFinal+
-DATA.webFinal+
-DATA.hostFinal;
-
-document.getElementById("total-amount").textContent=fmt(total);
-
-};
-
 </script>
-
 </body>
 </html>
